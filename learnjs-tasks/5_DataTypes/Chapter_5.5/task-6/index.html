@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      // Создать расширяемый калькулятор
+      // Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.
+      // Задание состоит из двух частей.
+      // Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.
+      //   Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.
+      function Calculator() {
+        this.operations = {
+          "+": (a, b) => a + b,
+          "-": (a, b) => a - b,
+        };
+
+        this.calculate = function (str) {
+          let exp = str.split(" "),
+            a = +exp[0],
+            b = +exp[2];
+
+          if (isNaN(a) || isNaN(b) || !this.operations[exp[1]]) {
+            alert("Ошибка!");
+            return "Ошибка";
+          }
+
+          return this.operations[exp[1]](a, b);
+        };
+
+        this.addMethod = function (name, func) {
+          this.operations[name] = func;
+        };
+      }
+
+      let calc = new Calculator();
+
+      let powerCalc = new Calculator();
+      powerCalc.addMethod("*", (a, b) => a * b);
+      powerCalc.addMethod("/", (a, b) => a / b);
+      powerCalc.addMethod("**", (a, b) => a ** b);
+
+      let result = powerCalc.calculate("2 ** 3");
+      console.log(powerCalc);
+      alert(result); // 8
+
+      alert(calc.calculate("3 + 7")); // 10
+    </script>
+  </body>
+</html>

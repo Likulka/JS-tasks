@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      //       Выделить число
+      // Есть стоимость в виде строки "$120". То есть сначала идёт знак валюты, а затем – число.
+
+      // Создайте функцию extractCurrencyValue(str), которая будет из такой строки выделять числовое значение и возвращать его.
+
+      function extractCurrencyValue(str) {
+        return +str.slice(1);
+      }
+
+      const price = "$120";
+
+      alert(extractCurrencyValue("$120") === 120); // true
+    </script>
+  </body>
+</html>

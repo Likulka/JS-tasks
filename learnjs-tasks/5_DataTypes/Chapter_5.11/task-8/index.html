@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      //         Форматирование относительной даты
+      // Напишите функцию formatDate(date), форматирующую date по следующему принципу:
+      // Если спустя date прошло менее 1 секунды, вывести "прямо сейчас".
+      // В противном случае, если с date прошло меньше 1 минуты, вывести "n сек. назад".
+      // В противном случае, если меньше часа, вывести "m мин. назад".
+      // В противном случае, полная дата в формате "DD.MM.YY HH:mm". А именно: "день.месяц.год часы:минуты", всё в виде двух цифр, т.е. 31.12.16 10:00.
+
+      function formatDate(date) {
+        let msg;
+        let diff = new Date() - date;
+        let diffInSec = Math.round(diff / 1000);
+        let diffInMin = Math.round(diffInSec / 60);
+
+        switch (true) {
+          case diff < 1000:
+            msg = "прямо сейчас";
+            break;
+          case diffInSec < 60:
+            msg = `${diffInSec} сек. назад`;
+            break;
+          case diffInMin < 60:
+            msg = `${diffInMin} мин. назад`;
+            break;
+          default:
+            let ourDate = [
+              date.getDate(),
+              date.getMonth() + 1,
+              date.getFullYear(),
+              date.getHours(),
+              date.getMinutes(),
+            ].map((elem) => {
+              elem = elem.toString();
+              return elem.length < 2 ? "0" + elem : elem.slice(-2);
+            });
+
+            msg = `${ourDate.slice(0, 3).join(".")} ${ourDate
+              .slice(3)
+              .join(":")}`;
+        }
+        return msg;
+      }
+
+      alert(formatDate(new Date(new Date() - 1))); // "прямо сейчас"
+
+      alert(formatDate(new Date(new Date() - 30 * 1000))); // "30 сек. назад"
+
+      alert(formatDate(new Date(new Date() - 5 * 60 * 1000))); // "5 мин. назад"
+
+      // вчерашняя дата вроде 31.12.2016, 20:00
+      alert(formatDate(new Date(new Date() - 86400 * 1000)));
+    </script>
+  </body>
+</html>

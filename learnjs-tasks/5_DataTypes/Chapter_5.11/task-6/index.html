@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      //       Сколько сегодня прошло секунд?
+      // Напишите функцию getSecondsToday(), возвращающую количество секунд с начала сегодняшнего дня.
+      // Например, если сейчас 10:00, и не было перехода на зимнее/летнее время, то:
+      function getSecondsToday() {
+        let dateTime = new Date();
+        let date = new Date(
+          dateTime.getFullYear(),
+          dateTime.getMonth(),
+          dateTime.getDate()
+        );
+
+        let secondsToday = Math.round((dateTime - date) / 1000);
+        return secondsToday;
+      }
+
+      alert(getSecondsToday());
+    </script>
+  </body>
+</html>
